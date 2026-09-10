@@ -17,12 +17,16 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm install
@@ -30,22 +34,43 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: SPA fallback for deep links
+      - name: Inspect build output
         run: |
-          if [ -f dist/index.html ]; then cp dist/index.html dist/404.html; fi
-          touch dist/.nojekyll
+          echo "=== Root directory ==="
+          ls -la
+          echo "=== dist ==="
+          ls -la dist || true
+          echo "=== .output ==="
+          ls -la .output || true
+
+      - name: Prepare GitHub Pages
+        run: |
+          if [ -d dist ]; then
+            cp dist/index.html dist/404.html 2>/dev/null || true
+            touch dist/.nojekyll
+          elif [ -d .output/public ]; then
+            cp .output/public/index.html .output/public/404.html 2>/dev/null || true
+            touch .output/public/.nojekyll
+          else
+            echo "ERROR: No static build output found."
+            exit 1
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: |
+            dist
+            .output/public
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
