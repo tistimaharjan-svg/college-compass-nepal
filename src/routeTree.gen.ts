@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CompareRouteImport } from './routes/compare'
+import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as SavedRouteImport } from './routes/saved'
+import { Route as CollegesIndexRouteImport } from './routes/colleges.index'
+import { Route as CollegesCollegeIdRouteImport } from './routes/colleges.$collegeId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollegesIndexRoute = CollegesIndexRouteImport.update({
+  id: '/colleges/',
+  path: '/colleges/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollegesCollegeIdRoute = CollegesCollegeIdRouteImport.update({
+  id: '/colleges/$collegeId',
+  path: '/colleges/$collegeId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
+  '/courses': typeof CoursesRoute
+  '/saved': typeof SavedRoute
+  '/colleges/$collegeId': typeof CollegesCollegeIdRoute
+  '/colleges/': typeof CollegesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
+  '/courses': typeof CoursesRoute
+  '/saved': typeof SavedRoute
+  '/colleges/$collegeId': typeof CollegesCollegeIdRoute
+  '/colleges': typeof CollegesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
+  '/courses': typeof CoursesRoute
+  '/saved': typeof SavedRoute
+  '/colleges/$collegeId': typeof CollegesCollegeIdRoute
+  '/colleges/': typeof CollegesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/compare'
+    | '/courses'
+    | '/saved'
+    | '/colleges/$collegeId'
+    | '/colleges/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/compare'
+    | '/courses'
+    | '/saved'
+    | '/colleges/$collegeId'
+    | '/colleges'
+  id:
+    | '__root__'
+    | '/'
+    | '/compare'
+    | '/courses'
+    | '/saved'
+    | '/colleges/$collegeId'
+    | '/colleges/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompareRoute: typeof CompareRoute
+  CoursesRoute: typeof CoursesRoute
+  SavedRoute: typeof SavedRoute
+  CollegesCollegeIdRoute: typeof CollegesCollegeIdRoute
+  CollegesIndexRoute: typeof CollegesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses': {
+      id: '/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colleges/': {
+      id: '/colleges/'
+      path: '/colleges'
+      fullPath: '/colleges/'
+      preLoaderRoute: typeof CollegesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colleges/$collegeId': {
+      id: '/colleges/$collegeId'
+      path: '/colleges/$collegeId'
+      fullPath: '/colleges/$collegeId'
+      preLoaderRoute: typeof CollegesCollegeIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompareRoute: CompareRoute,
+  CoursesRoute: CoursesRoute,
+  SavedRoute: SavedRoute,
+  CollegesCollegeIdRoute: CollegesCollegeIdRoute,
+  CollegesIndexRoute: CollegesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

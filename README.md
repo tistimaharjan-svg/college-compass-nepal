@@ -1,29 +1,47 @@
-# Welcome to your Lovable project
+# College Finder Nepal
 
-This project was built with [Lovable](https://lovable.dev).
+Find the right college, course, and future in Nepal.
 
-## Build with Lovable
+A small React + TypeScript MVP for searching, comparing and saving colleges and courses.
+All data is static **demo data** stored in `src/data/`. There is no backend, database or login.
+Saved colleges are kept in the browser's `localStorage`.
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+## Install
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+```bash
+npm install
+```
 
-## Development
+## Run locally
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
 npm run dev
 ```
 
-## Built with
+The app runs at http://localhost:8080
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## Build
+
+```bash
+npm run build
+```
+
+The static output is written to `dist/`.
+
+## Deploy to GitHub Pages
+
+1. Push the project to a GitHub repository.
+2. In the repository, go to **Settings → Pages** and set **Source** to **GitHub Actions**.
+3. Push to the `main` branch. The workflow in `.github/workflows/deploy.yml` installs
+   dependencies, builds the app, uploads the build output as a Pages artifact and deploys it.
+4. The site becomes available at `https://<username>.github.io/<repository>/`.
+
+If the site is served from a subfolder (`/<repository>/`), set the base path before building
+or publish the repository as `<username>.github.io` so the site is served from the root.
+
+## Data
+
+- `src/data/colleges.ts` — demo colleges
+- `src/data/courses.ts` — demo courses
+
+All values are unverified sample data for demonstration only.

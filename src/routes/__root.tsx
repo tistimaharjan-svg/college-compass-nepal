@@ -77,11 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "College Finder Nepal" },
+      {
+        name: "description",
+        content: "Find the right college, course, and future in Nepal.",
+      },
+      { property: "og:title", content: "College Finder Nepal" },
+      {
+        property: "og:description",
+        content: "Find the right college, course, and future in Nepal.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -119,8 +124,49 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col bg-background">
+        <SiteHeader />
+        <main className="flex-1">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </main>
+        <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">
+          College Finder Nepal · Demo data only
+        </footer>
+      </div>
     </QueryClientProvider>
+  );
+}
+
+const NAV = [
+  { to: "/", label: "Home" },
+  { to: "/colleges", label: "Colleges" },
+  { to: "/courses", label: "Courses" },
+  { to: "/compare", label: "Compare" },
+  { to: "/saved", label: "Saved" },
+] as const;
+
+function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+        <Link to="/" className="text-sm font-bold tracking-tight text-foreground">
+          College Finder Nepal
+        </Link>
+        <nav className="flex flex-wrap items-center gap-1">
+          {NAV.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              activeOptions={{ exact: item.to === "/" }}
+              activeProps={{ className: "bg-accent text-accent-foreground" }}
+              className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition hover:bg-accent hover:text-accent-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 }
