@@ -47,10 +47,11 @@ export const Route = createFileRoute("/colleges/")({
 
 function CollegesPage() {
   const { toggle, isSaved } = useSavedColleges();
-  const [query, setQuery] = useState("");
-  const [province, setProvince] = useState("");
+  const initial = Route.useSearch();
+  const [query, setQuery] = useState(initial.q ?? "");
+  const [province, setProvince] = useState(initial.province ?? "");
   const [district, setDistrict] = useState("");
-  const [program, setProgram] = useState("");
+  const [program, setProgram] = useState(initial.program ?? "");
   const [type, setType] = useState("");
   const [university, setUniversity] = useState("");
   const [sort, setSort] = useState("name-asc");
