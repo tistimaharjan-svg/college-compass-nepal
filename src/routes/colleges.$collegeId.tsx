@@ -31,7 +31,11 @@ function CollegeDetail() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
         <h1 className="text-xl font-semibold text-foreground">College not found</h1>
-        <Link to="/colleges" className="mt-4 inline-block text-sm font-semibold text-primary">
+        <Link
+          to="/colleges"
+          search={{}}
+          className="mt-4 inline-block text-sm font-semibold text-primary"
+        >
           Back to all colleges
         </Link>
       </div>
