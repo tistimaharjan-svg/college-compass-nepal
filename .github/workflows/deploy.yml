@@ -40,8 +40,13 @@ jobs:
           ls -la
           echo "=== dist ==="
           ls -la dist || true
-          echo "=== .output ==="
-          ls -la .output || true
+          echo "=== .output ==="ls -la .output || true
+
+echo "=== .output/public ==="
+ls -la .output/public || true
+
+echo "=== Looking for index.html ==="
+find .output -name "index.html" -print || true
 
       - name: Prepare GitHub Pages
         run: |
