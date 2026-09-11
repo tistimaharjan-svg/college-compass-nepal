@@ -13,9 +13,13 @@ import {
 } from "@/data/colleges";
 import { useSavedColleges } from "@/lib/saved";
 
-type CollegeSearch = { q: string; province: string; program: string };
+type CollegeSearch = {
+  q?: string | undefined;
+  province?: string | undefined;
+  program?: string | undefined;
+};
 
-const asText = (v: unknown) => (typeof v === "string" ? v : "");
+const asText = (v: unknown) => (typeof v === "string" && v ? v : undefined);
 
 export const Route = createFileRoute("/colleges/")({
   validateSearch: (search: Record<string, unknown>): CollegeSearch => ({
