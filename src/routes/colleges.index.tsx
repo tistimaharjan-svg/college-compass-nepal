@@ -13,7 +13,20 @@ import {
 } from "@/data/colleges";
 import { useSavedColleges } from "@/lib/saved";
 
+type CollegeSearch = {
+  q?: string | undefined;
+  province?: string | undefined;
+  program?: string | undefined;
+};
+
+const asText = (v: unknown) => (typeof v === "string" && v ? v : undefined);
+
 export const Route = createFileRoute("/colleges/")({
+  validateSearch: (search: Record<string, unknown>): CollegeSearch => ({
+    q: asText(search["q"]),
+    province: asText(search["province"]),
+    program: asText(search["program"]),
+  }),
   head: () => ({
     meta: [
       { title: "Search Colleges in Nepal | College Finder Nepal" },
@@ -34,10 +47,11 @@ export const Route = createFileRoute("/colleges/")({
 
 function CollegesPage() {
   const { toggle, isSaved } = useSavedColleges();
-  const [query, setQuery] = useState("");
-  const [province, setProvince] = useState("");
+  const initial = Route.useSearch();
+  const [query, setQuery] = useState(initial.q ?? "");
+  const [province, setProvince] = useState(initial.province ?? "");
   const [district, setDistrict] = useState("");
-  const [program, setProgram] = useState("");
+  const [program, setProgram] = useState(initial.program ?? "");
   const [type, setType] = useState("");
   const [university, setUniversity] = useState("");
   const [sort, setSort] = useState("name-asc");

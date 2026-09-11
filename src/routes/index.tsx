@@ -46,7 +46,7 @@ function Home() {
             className="mx-auto mt-8 flex max-w-xl gap-2"
             onSubmit={(e) => {
               e.preventDefault();
-              void navigate({ to: "/colleges" });
+              void navigate({ to: "/colleges", search: { q: query || undefined } });
             }}
           >
             <input
@@ -71,7 +71,8 @@ function Home() {
           {courses.map((c) => (
             <Link
               key={c.code}
-              to="/courses"
+              to="/colleges"
+              search={{ program: c.code }}
               className="rounded-full border border-input bg-card px-4 py-2 text-sm font-medium text-card-foreground transition hover:bg-accent"
             >
               {c.code}
@@ -87,6 +88,7 @@ function Home() {
         </div>
         <Link
           to="/colleges"
+          search={{}}
           className="mt-6 inline-block text-sm font-semibold text-primary hover:underline"
         >
           See all colleges →
@@ -98,6 +100,7 @@ function Home() {
             <Link
               key={p}
               to="/colleges"
+              search={{ province: p }}
               className="rounded-xl border border-border bg-card p-4 transition hover:bg-accent"
             >
               <p className="text-sm font-semibold text-card-foreground">{p}</p>
