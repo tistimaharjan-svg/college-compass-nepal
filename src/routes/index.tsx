@@ -87,6 +87,7 @@ function Home() {
         </div>
         <Link
           to="/colleges"
+          search={{}}
           className="mt-6 inline-block text-sm font-semibold text-primary hover:underline"
         >
           See all colleges →
