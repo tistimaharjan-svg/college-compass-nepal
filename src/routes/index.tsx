@@ -46,7 +46,7 @@ function Home() {
             className="mx-auto mt-8 flex max-w-xl gap-2"
             onSubmit={(e) => {
               e.preventDefault();
-              void navigate({ to: "/colleges" });
+              void navigate({ to: "/colleges", search: { q: query || undefined } });
             }}
           >
             <input
