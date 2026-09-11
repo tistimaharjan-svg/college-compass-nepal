@@ -71,7 +71,8 @@ function Home() {
           {courses.map((c) => (
             <Link
               key={c.code}
-              to="/courses"
+              to="/colleges"
+              search={{ program: c.code }}
               className="rounded-full border border-input bg-card px-4 py-2 text-sm font-medium text-card-foreground transition hover:bg-accent"
             >
               {c.code}
