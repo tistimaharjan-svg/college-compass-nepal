@@ -99,6 +99,7 @@ function Home() {
             <Link
               key={p}
               to="/colleges"
+              search={{ province: p }}
               className="rounded-xl border border-border bg-card p-4 transition hover:bg-accent"
             >
               <p className="text-sm font-semibold text-card-foreground">{p}</p>
