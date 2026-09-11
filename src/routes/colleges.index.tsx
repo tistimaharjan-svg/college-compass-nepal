@@ -13,7 +13,15 @@ import {
 } from "@/data/colleges";
 import { useSavedColleges } from "@/lib/saved";
 
+type CollegeSearch = { q?: string; province?: string; program?: string };
+
 export const Route = createFileRoute("/colleges/")({
+  validateSearch: (search: Record<string, unknown>): CollegeSearch => ({
+    q: typeof search.q === "string" && search.q ? search.q : undefined,
+    province:
+      typeof search.province === "string" && search.province ? search.province : undefined,
+    program: typeof search.program === "string" && search.program ? search.program : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Search Colleges in Nepal | College Finder Nepal" },
