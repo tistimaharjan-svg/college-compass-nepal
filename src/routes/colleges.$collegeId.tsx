@@ -44,7 +44,11 @@ function CollegeDetail() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <Link to="/colleges" className="text-sm text-muted-foreground hover:text-foreground">
+      <Link
+        to="/colleges"
+        search={{}}
+        className="text-sm text-muted-foreground hover:text-foreground"
+      >
         ← Back to colleges
       </Link>
 
