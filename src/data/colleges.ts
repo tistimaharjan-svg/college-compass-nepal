@@ -1,4 +1,5 @@
 export type College = {
+  fees?: Partial<Record<string, string>>;
   id: string;
   name: string;
   city: string;
