@@ -39,13 +39,13 @@ function ComparePage() {
 
   const picked = colleges.filter((c) => selected.includes(c.id));
   const rows: { label: string; value: (c: (typeof colleges)[number]) => string }[] = [
-    { label: "Location", value: (c) => `${c.city}, ${c.province}` },
-    { label: "University", value: (c) => c.university },
-    { label: "College type", value: (c) => c.type },
-    { label: "Programs", value: (c) => c.programs.join(", ") },
-    { label: "Typical duration", value: (c) => durationFor(c.programs) },
-    { label: "Admission", value: (c) => c.admission },
-  ];
+  { label: "Location", value: (c) => `${c.city}, ${c.province}` },
+  { label: "University", value: (c) => c.university },
+  { label: "College type", value: (c) => c.type },
+  { label: "Programs", value: (c) => c.programs.join(", ") },
+  { label: "Typical duration", value: (c) => durationFor(c.programs) },
+  { label: "Admission", value: (c) => c.admission },
+];
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
