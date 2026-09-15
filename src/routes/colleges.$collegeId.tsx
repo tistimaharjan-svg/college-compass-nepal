@@ -33,10 +33,12 @@ const { toggle, isSaved } = useSavedColleges();
 const college = colleges.find((c) => c.id === collegeId);
 
 if (!college) {
-return ( <div className="mx-auto max-w-3xl px-4 py-20 text-center"> <h1 className="text-xl font-semibold text-foreground">
-College not found </h1>
-
-```
+return ( 
+    <div className="mx-auto max-w-3xl px-4 py-20 text-center"> 
+        <h1 className="text-xl font-semibold text-foreground">
+College not found
+        </h1>
+    
     <Link
       to="/colleges"
       search={{}}
@@ -46,11 +48,9 @@ College not found </h1>
     </Link>
   </div>
 );
-```
+}
 
-So it should become:
 
-```tsx
 return (
   <div className="mx-auto max-w-4xl px-4 py-10">
     <Link
@@ -177,7 +177,6 @@ return (
     <DemoNotice />
   </div>
 </div>
-```
 
 );
 }
@@ -207,17 +206,16 @@ title,
 children,
 }: {
 title: string;
-children: React.ReactNode;
+import type { ReactNode } from "react";
 }) {
 return ( <section className="mt-8"> <h2 className="text-lg font-semibold text-foreground">
 {title} </h2>
 
-```
+
   <div className="mt-3">
     {children}
   </div>
 </section>
-```
 
 );
 }
