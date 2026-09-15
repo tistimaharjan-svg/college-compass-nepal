@@ -99,43 +99,37 @@ return ( <div className="mx-auto max-w-4xl px-4 py-10"> <Link
   </Section>
 
   <Section title="Fee structure">
-    {college.fees && Object.keys(college.fees).length > 0 ? (
-      <div className="overflow-hidden rounded-lg border border-border bg-card">
-        <div className="grid grid-cols-2 border-b border-border bg-muted px-4 py-3 text-sm font-semibold">
-          <span>Program</span>
-          <span>Approx. fee</span>
+  {college.fees && Object.keys(college.fees).length > 0 ? (
+    <div className="overflow-hidden rounded-lg border border-border bg-card">
+      <div className="grid grid-cols-2 border-b border-border bg-muted px-4 py-3 text-sm font-semibold">
+        <span>Program</span>
+        <span>Approx. fee</span>
+      </div>
+
+      {Object.entries(college.fees).map(([program, fee]) => (
+        <div
+          key={program}
+          className="grid grid-cols-2 border-b border-border px-4 py-3 text-sm last:border-b-0"
+        >
+          <span className="font-medium text-card-foreground">
+            {program}
+          </span>
+          <span className="text-muted-foreground">{fee}</span>
         </div>
-
-        {Object.entries(college.fees).map(([program, fee]) => (
-          <div
-            key={program}
-            className="grid grid-cols-2 border-b border-border px-4 py-3 text-sm last:border-b-0"
-          >
-            <span className="font-medium text-card-foreground">
-              {program}
-            </span>
-            <span className="text-muted-foreground">{fee}</span>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div className="rounded-lg border border-dashed border-border bg-muted/30 p-4">
-        <p className="text-sm font-medium text-foreground">
-          Fee information not available yet.
-        </p>
-        <p className="mt-1 text-xs text-muted-foreground">
-          Current fee information will be added after verification with
-          the college or university.
-        </p>
-      </div>
-    )}
-  </Section>
-
-  <Section title="Admission information">
-    <p className="text-sm text-muted-foreground">
-      {college.admission}
-    </p>
-  </Section>
+      ))}
+    </div>
+  ) : (
+    <div className="rounded-lg border border-dashed border-border bg-muted/30 p-4">
+      <p className="text-sm font-medium text-foreground">
+        Fee information not available yet.
+      </p>
+      <p className="mt-1 text-xs text-muted-foreground">
+        Current fee information will be added after verification with the
+        college or university.
+      </p>
+    </div>
+  )}
+</Section>
 
   <Section title="Facilities">
     <ul className="grid gap-1 text-sm text-muted-foreground sm:grid-cols-2">
