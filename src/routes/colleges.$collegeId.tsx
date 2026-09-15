@@ -48,27 +48,29 @@ College not found </h1>
 );
 ```
 
-}
+So it should become:
 
-return ( <div className="mx-auto max-w-4xl px-4 py-10"> <Link
-     to="/colleges"
-     search={{}}
-     className="text-sm text-muted-foreground hover:text-foreground"
-   >
-← Back to colleges </Link>
+```tsx
+return (
+  <div className="mx-auto max-w-4xl px-4 py-10">
+    <Link
+      to="/colleges"
+      search={{}}
+      className="text-sm text-muted-foreground hover:text-foreground"
+    >
+      ← Back to colleges
+    </Link>
 
-```
-  <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
-    <div>
-      <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
-        {college.name}
-      </h1>
+    <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+          {college.name}
+        </h1>
 
-      <p className="mt-1 text-sm text-muted-foreground">
-        {college.city}, {college.district} · {college.province} Province
-      </p>
-    </div>
-
+        <p className="mt-1 text-sm text-muted-foreground">
+          {college.city}, {college.district} · {college.province} Province
+        </p>
+      </div>
     <button
       type="button"
       onClick={() => toggle(college.id)}
