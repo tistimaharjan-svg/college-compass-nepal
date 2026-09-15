@@ -40,31 +40,29 @@ jobs:
           ls -la
           echo "=== dist ==="
           ls -la dist || true
-          echo "=== .output ==="ls -la .output || true
-
-echo "=== .output/public ==="
-ls -la .output/public || true
-
-echo "=== Looking for index.html ==="
-find .output -name "index.html" -print || true
+          echo "=== .output ==="
+          ls -la .output || true
+          echo "=== .output/public ==="
+          ls -la .output/public || true
+          echo "=== Looking for index.html ==="
+          find .output -name "index.html" -print || true
 
       - name: Prepare GitHub Pages
         run: |
-          if [ -d dist ]; then
-            cp dist/index.html dist/404.html 2>/dev/null || true
-            touch dist/.nojekyll
-          elif [ -d .output/public ]; then
-            cp .output/public/index.html .output/public/404.html 2>/dev/null || true
-            touch .output/public/.nojekyll
-          else
-            echo "ERROR: No static build output found."
+          if [ ! -f .output/public/index.html ]; then
+            echo "ERROR: .output/public/index.html was not found."
+            echo "Files in .output/public:"
+            find .output/public -maxdepth 2 -type f -print
             exit 1
           fi
+
+          cp .output/public/index.html .output/public/404.html
+          touch .output/public/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: .output/public
 
   deploy:
     needs: build
